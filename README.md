@@ -12,3 +12,10 @@ Vous devrez ensuite rentrer le chemin absolu de votre base dans la console de Sp
 le programme se chargera de générer un fichier scoring.txt qui contient le score
 d'appartenance à la classe cible 'm16'.
 
+## Autres fichiers
+### featureselection.py
+Il s'agit du fichier dans lequel se trouve le code que nous avons utilisé afin d'effectuer notre
+sélection de variables.
+
+### dtree_model_eval.ipynb
+Il s'agit du code source qui a permi la génération du fichier dtree.sav pour prédire la variable V200.
