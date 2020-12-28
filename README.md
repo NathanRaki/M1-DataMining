@@ -18,4 +18,5 @@ Il s'agit du fichier dans lequel se trouve le code que nous avons utilisé afin 
 sélection de variables.
 
 ### dtree_model_eval.ipynb
-Il s'agit du code source qui a permi la génération du fichier dtree.sav pour prédire la variable V200.
+Il s'agit du notebook Jupyter dans lequel se trouve le code qui a permi
+la génération du fichier dtree.sav pour prédire la variable V200.
