@@ -22,5 +22,5 @@ Il s'agit du fichier dans lequel se trouve le code que nous avons utilisé afin 
 sélection de variables.
 
 ### Classement/dtree_model_eval.ipynb
-Il s'agit du notebook Jupyter dans lequel du code ainsi que des commentaires
+Il s'agit du notebook Jupyter dans lequel on trouve du code ainsi que des commentaires
 sur la modélisation et l'évaluation de notre méthode de classement.
