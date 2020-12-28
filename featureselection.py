@@ -1,4 +1,4 @@
-#%% Import
+#%% Importing Libraries
 import os
 import pandas as pd
 import statsmodels.api as sm
@@ -10,25 +10,26 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import VarianceThreshold
 os.chdir(os.path.dirname(__file__))
 
-#%%
+#%% Importing Data
 data = pd.read_csv("./data/data_avec_etiquettes.txt", sep="\t")
 
 encoder = OrdinalEncoder()
-encoder.fit(data[["V160", "V161", "V162"]])
-data[["V160", "V161", "V162"]] = encoder.transform(data[["V160", "V161", "V162"]])
+encoder.fit(data[["V160", "V161", "V162", "V200"]])
+data[["V160", "V161", "V162", "V200"]] = encoder.transform(data[["V160", "V161", "V162", "V200"]])
 
 X = data.iloc[:,0:199]
 y = data.iloc[:,199]
 print(data.head())
 
-#%%
+#%% Backward Elimination
+
 cols = list(X.columns)
 pmax = 1
 while (len(cols) > 0):
     p = []
     X_1 = X[cols]
     X_1 = sm.add_constant(X_1)
-    model = sm.OLS(y, X_1).fit()
+    model = sm.OLS(y.astype(float), X_1.astype(float)).fit()
     p = pd.Series(model.pvalues.values[1:], index=cols)
     pmax = max(p)
     feature_with_p_max = p.idxmax()
@@ -47,6 +48,7 @@ print(selected_features_BE)
 # 'V188', 'V189', 'V190', 'V191', 'V192', 'V193', 'V194', 'V195', 'V197', 'V198', 'V199']
 
 #%% Removing constant, duplicates, correlated features
+
 columns_to_remove = set()
 
 constant_filter = VarianceThreshold(threshold=0.01)
@@ -56,8 +58,6 @@ constant_columns = [column for column in X.columns if column not in X.columns[co
 columns_to_remove.update(constant_columns)
 X = X.drop(columns=constant_columns)
 print(X.shape)
-
-#%%
     
 X_d = X.T.duplicated()
 duplicated_columns = list(X_d[X_d==True].index)
@@ -65,7 +65,6 @@ duplicated_columns = list(X_d[X_d==True].index)
 columns_to_remove.update(duplicated_columns)
 X = X.drop(columns=duplicated_columns)
 print(X.shape)
-#%%
 
 num_columns = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 numerical_columns = list(X.select_dtypes(include=num_columns).columns)
@@ -86,7 +85,7 @@ X = X.drop(columns=correlated_features)
 #V186,V179,V169,V167,V165,V188,V192,V183,V176,V172,V177,V187
 #V184,V181,V175,V180
 
-#%%
+#%% SelectKBest
 
 bestfeatures = SelectKBest(score_func=f_classif, k=100)
 
@@ -101,7 +100,8 @@ featureScores = featureScores[featureScores['Score']>0.05]
 #print(featureScores.nlargest(140, 'Score'))
 print(featureScores)
 
-#%%
+#%% ExtraTreesClassifier
+
 model = ExtraTreesClassifier()
 model.fit(X, y)
 importances = pd.DataFrame({'label':X.columns.array.to_numpy(), 'score':model.feature_importances_}, columns=['label', 'score'])
