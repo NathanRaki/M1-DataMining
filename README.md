@@ -10,7 +10,7 @@ de générer un fichier predictions.txt qui contient la colonne y_pred soit la p
 ### Système de scoring => Scoring/(scoring.py & LDA.sav)
 Ouvrir le fichier scoring.py dans Spyder puis exécuter le script (F5).  
 Vous devrez ensuite rentrer le chemin absolu de votre base dans la console de Spyder puis
-le programme se chargera de générer un fichier scoring.txt qui contient le score
+le programme se chargera de générer un fichier Score.csv qui contient le score
 d'appartenance à la classe cible 'm16'.
 
 ## Autres fichiers
