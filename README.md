@@ -1,5 +1,5 @@
 # M1-DataMining
-### Frank Doronzo, Romain Dudoit, Nathan Coustance
+#### Frank Doronzo, Romain Dudoit, Nathan Coustance
 
 ## Programmes de déploiement
 ### Système de classement => Classement/(arbre.py & dtree.sav)
