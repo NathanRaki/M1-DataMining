@@ -57,6 +57,7 @@ columns_to_remove.update(constant_columns)
 X = X.drop(columns=constant_columns)
 print(X.shape)
 
+#%%
     
 X_d = X.T.duplicated()
 duplicated_columns = list(X_d[X_d==True].index)
@@ -64,6 +65,7 @@ duplicated_columns = list(X_d[X_d==True].index)
 columns_to_remove.update(duplicated_columns)
 X = X.drop(columns=duplicated_columns)
 print(X.shape)
+#%%
 
 num_columns = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 numerical_columns = list(X.select_dtypes(include=num_columns).columns)
